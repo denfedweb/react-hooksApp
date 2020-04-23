@@ -4,7 +4,7 @@ import {NavLink, Link} from "react-router-dom";
 import {CurrentUserContext} from "../../contexts/currentUser";
 
 function Navbar() {
-    const [currentUserState, setCurrentUser] = useContext(CurrentUserContext);
+    const [currentUserState] = useContext(CurrentUserContext);
 
     return (
         <nav className="uk-navbar-container" data-uk-navbar>

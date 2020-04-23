@@ -12,7 +12,7 @@ function Routes(){
             <Route path="/" exact component={GlobalFeed}/>
             <Route path="/feed" component={YourFeed}/>
             <Route path="/tags/:slug" component={TagFeed}/>
-            <Route path="/article/:slug" component={Article}/>
+            <Route path="/articles/:slug" component={Article}/>
             <Route path="/login">
                 <Auth type={{
                     isReg: false,

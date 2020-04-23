@@ -13,7 +13,7 @@ function GlobalFeed({location, match}) {
        limit, offset
     });
     const url = match.url;
-    const [{response, isLoading, error}, doFetch] = useFetch(`https://conduit.productionready.io/api/articles?${stringifiedParams}`);
+    const [{response, isLoading}, doFetch] = useFetch(`https://conduit.productionready.io/api/articles?${stringifiedParams}`);
 
     useEffect(()=>{
         doFetch();
