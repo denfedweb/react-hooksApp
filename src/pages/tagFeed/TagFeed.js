@@ -6,6 +6,7 @@ import {getPaginator, limit} from "../../utils";
 import {stringify} from "query-string";
 import PopularTags from "../../components/popularTags/PopularTags";
 import FeedToggler from "../../components/feedToggler/feedToggler";
+import Loading from "../../components/loading/Loading";
 
 function TagFeed({location, match}) {
     const tagName = match.params.slug;
@@ -22,7 +23,7 @@ function TagFeed({location, match}) {
 
     return (
         <div className="uk-margin-large-top">
-            {isLoading && <div data-uk-spinner/>}
+            {isLoading && <Loading/>}
             {!isLoading && response && (
                 <Fragment>
                     <div className="row">

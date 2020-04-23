@@ -11,7 +11,7 @@ function Auth(props) {
     const [{response, error, isLoading, setError}, doFetch] = useFetch(`https://conduit.productionready.io/${api}`);
     const [isSuccessSubmit, setIsSuccessSubmit] = useState(false);
     const [, setToken] = useLocalStorage("token");
-    const [, setCurrentUser] = useContext(CurrentUserContext);
+    const [, dispatch] = useContext(CurrentUserContext);
 
     function changeInput(event) {
         setForm({
@@ -30,13 +30,9 @@ function Auth(props) {
         }
         setToken(response.user.token);
         setIsSuccessSubmit(true);
-        setCurrentUser(state=>({
-                ...state,
-                isLoggedIn: true,
-                isLoading: false,
-                currentUser: response.user
-        }));
-    }, [response, setToken, setCurrentUser]);
+        dispatch({type: "SET_AUTHORIZED", payload: response.user});
+
+    }, [response, setToken, dispatch]);
 
     function submitForm() {
         setError(null);
