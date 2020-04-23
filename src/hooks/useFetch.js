@@ -42,6 +42,8 @@ export default function useFetch(url){
                     console.error(error);
                 })
             } catch (e) {
+                setIsLoading(false);
+                setError(e);
                 console.error(e);
             }
         }
