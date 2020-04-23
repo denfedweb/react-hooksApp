@@ -26,7 +26,7 @@ function Feed({articles}) {
                         </div>
                     </header>
                     <div className="uk-comment-body">
-                        <Link to={`/articles/${article.slug}`}>
+                        <Link to={`/article/${article.slug}`}>
                             <h3>{article.title}</h3>
                             <p>{article.description}</p>
                             <span>Read more...</span>

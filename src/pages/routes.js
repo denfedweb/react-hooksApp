@@ -5,14 +5,17 @@ import Article from './article/Article';
 import Auth from "./auth/Auth";
 import TagFeed from "./tagFeed/TagFeed";
 import YourFeed from "./yourFeed/YourFeed";
+import CreateArticle from "./createArticle/CreateArticle";
+
 
 function Routes(){
     return (
         <Switch>
             <Route path="/" exact component={GlobalFeed}/>
-            <Route path="/feed" component={YourFeed}/>
             <Route path="/tags/:slug" component={TagFeed}/>
-            <Route path="/articles/:slug" component={Article}/>
+            <Route path="/article/:slug" component={Article}/>
+            <Route path="/articles/new" component={CreateArticle}/>
+            <Route path="/feed" component={YourFeed}/>
             <Route path="/login">
                 <Auth type={{
                     isReg: false,
@@ -31,10 +34,10 @@ function Routes(){
                     api: "api/users"
                 }}/>
             </Route>
-
-            {/*<Redirect to="/" />*/}
+            <Redirect to="/" />
         </Switch>
     )
+
 }
 
 export default Routes
