@@ -17,9 +17,11 @@ export default function useFetch(url){
     }, [])
 
     useEffect(() => {
-        let skipGetResponseAfterDestroy = false;
+        const CancelToken = axios.CancelToken;
+        const source = CancelToken.source();
+
         const requestOptions = {
-            ...options, ...{
+            ...{...options, cancelToken: source.token}, ...{
                 headers:{
                     authorization: token ? `Token ${token}` : ''
                 }
@@ -30,22 +32,38 @@ export default function useFetch(url){
             return
         }
 
-        axios(url, requestOptions
-        ).then(res=>{
-            if(!skipGetResponseAfterDestroy){
+        const loadData = () => {
+            try {
+                axios(url, requestOptions
+                ).then(res=>{
+                    setIsLoading(false);
+                    setResponse(res.data);
+                })
+            } catch (e) {
                 setIsLoading(false);
-                setResponse(res.data);
+                setError(e);
+                console.error(e);
             }
-        }).catch(err=>{
-            if(!skipGetResponseAfterDestroy){
-                setIsLoading(false);
-                setError(err);
-            }
-        });
-
-        return () => {
-            skipGetResponseAfterDestroy = true;
         }
+
+        // axios(url, requestOptions
+        // ).then(res=>{
+        //     setIsLoading(false);
+        //     setResponse(res.data);
+        // }).catch(err=>{
+        //     setIsLoading(false);
+        //     setError(err);
+        //     if (axios.isCancel(err)) {
+        //         console.log("cancelled");
+        //     } else {
+        //         throw err;
+        //     }
+        // });
+
+        loadData();
+        return () => {
+            source.cancel();
+        };
 
     }, [isLoading, options, url, token]);
 

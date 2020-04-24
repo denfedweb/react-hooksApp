@@ -7,6 +7,7 @@ import TagFeed from "./tagFeed/TagFeed";
 import YourFeed from "./yourFeed/YourFeed";
 import CreateArticle from "./createArticle/CreateArticle";
 import EditArticle from "./editArticle/EditArticle";
+import UserProfile from "./userProfile/UserProfile";
 
 
 function Routes(){
@@ -18,6 +19,7 @@ function Routes(){
             <Route path="/article/:slug" component={Article}/>
             <Route path="/articles/new" component={CreateArticle}/>
             <Route path="/feed" component={YourFeed}/>
+            <Route path="/profiles/:slug" component={UserProfile}/>/>
             <Route path="/login">
                 <Auth type={{
                     isReg: false,

@@ -1,24 +1,19 @@
-import React, {useEffect, Fragment} from 'react'
+import React, {useEffect, Fragment, useContext} from 'react'
 import useFetch from "../../hooks/useFetch";
 import Feed from "../../components/feed/Feed";
-import Pagination from "../../components/pagination/Pagination";
-import {getPaginator, limit} from "../../utils";
-import {stringify} from "query-string";
 import PopularTags from "../../components/popularTags/PopularTags";
 import FeedToggler from "../../components/feedToggler/feedToggler";
 import Loading from "../../components/loading/Loading";
+import {CurrentUserContext} from "../../contexts/currentUser";
 
-function YourFeed({location, match}) {
-    const {offset, currentPage} = getPaginator(location.search);
-    const stringifiedParams = stringify({
-        limit, offset
-    });
-    const url = match.url;
-    const [{response, isLoading}, doFetch] = useFetch(`https://conduit.productionready.io/api/articles/feed?${stringifiedParams}`);
+function YourFeed() {
+    const [currentUserState] = useContext(CurrentUserContext);
+    const api = currentUserState.isLoggedIn && currentUserState.currentUser.username;
+    const [{response, isLoading}, doFetch] = useFetch(`https://conduit.productionready.io/api/articles?author=${api}&limit=5&offset=0`);
 
     useEffect(()=>{
         doFetch();
-    }, [doFetch, currentPage]);
+    }, [doFetch, api]);
 
     return (
         <div className="uk-margin-large-top">
@@ -37,7 +32,6 @@ function YourFeed({location, match}) {
                             <PopularTags/>
                         </div>
                     </div>
-                    <Pagination total={response.articlesCount} limit={limit} url={url} currentPage={currentPage} />
                 </Fragment>
             )}
         </div>

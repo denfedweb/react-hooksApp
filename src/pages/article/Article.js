@@ -4,6 +4,8 @@ import Loading from "../../components/loading/Loading";
 import {Link} from "react-router-dom";
 import {CurrentUserContext} from "../../contexts/currentUser";
 import {Redirect} from 'react-router-dom';
+
+
 function Article({match}) {
     const [currentUserState] = useContext(CurrentUserContext);
     const api = match.params.slug;
