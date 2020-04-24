@@ -19,7 +19,6 @@ function CreateArticle() {
     }, [response]);
 
     if(submitState){
-        console.log(response);
         return <Redirect to={`/article/${response.article.slug}`} />
     }
 

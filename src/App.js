@@ -1,8 +1,8 @@
-import React from 'react'
-import {BrowserRouter as Router} from 'react-router-dom'
-import Routes from './pages/routes'
+import React from 'react';
+import {BrowserRouter as Router} from 'react-router-dom';
+import Routes from './pages/routes';
 import Navbar from "./components/Navbar/Navbar";
-import {CurrentUserProvider} from './contexts/currentUser'
+import {CurrentUserProvider} from './contexts/currentUser';
 import CurrentUserChecker from "./hoc/currentUserChecker";
 
 function App() {
@@ -22,4 +22,4 @@ function App() {
     )
 }
 
-export default App
+export default App;
