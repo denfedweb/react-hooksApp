@@ -38,8 +38,6 @@ export default function useFetch(url){
                 ).then(res=>{
                     setIsLoading(false);
                     setResponse(res.data);
-                }).catch(error => {
-                    console.error(error);
                 })
             } catch (e) {
                 setIsLoading(false);
